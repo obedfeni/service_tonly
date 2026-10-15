@@ -1,0 +1,13 @@
+# Deploy the Python ML API separately from the Next.js app.
+# In Render, create a Blueprint from this repository and use this service definition.
+services:
+  - type: web
+    name: tonly-predictive-maintenance-ml
+    runtime: docker
+    dockerfilePath: ./ml-service/Dockerfile
+    dockerContext: ./ml-service
+    healthCheckPath: /health
+    plan: starter
+    envVars:
+      - key: ML_API_SECRET
+        generateValue: true
